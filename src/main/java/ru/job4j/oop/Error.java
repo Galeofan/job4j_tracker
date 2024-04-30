@@ -2,11 +2,11 @@ package ru.job4j.oop;
 
 public class Error {
 
-    boolean active;
+    private boolean active;
 
-    int status;
+    private int status;
 
-    String message;
+    private String message;
 
     public Error() { }
 
