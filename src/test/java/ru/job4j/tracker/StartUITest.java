@@ -9,7 +9,7 @@ class StartUITest {
         Input input = new MockInput(
                 new String[] {"0", "Item name", "1"}
         );
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         Tracker tracker = new Tracker();
         UserAction[] actions = {
                 new CreateAction(output),
@@ -27,7 +27,7 @@ class StartUITest {
         Input input = new MockInput(
                 new String[] {"0", String.valueOf(item.getId()), replacedName, "1"}
         );
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         UserAction[] actions = {
                 new ReplaceAction(output),
                 new ExitAction(output)
@@ -40,7 +40,7 @@ class StartUITest {
     void whenDeleteItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Deleted item"));
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         Input input = new MockInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
         );
