@@ -20,8 +20,7 @@ public class FindEl {
         str[1] = "1234";
         try {
             indexOf(str, "1234");
-        }
-        catch (ElementNotFoundException e) {
+        } catch (ElementNotFoundException e) {
             e.printStackTrace();
         }
 
