@@ -5,28 +5,23 @@ public class UserStore {
     public static User findUser(User[] users, String login) throws UserNotFoundException {
         User result = null;
         for (User user : users) {
-            if (user.getUsername() == login) {
+            if (user.getUsername().equals(login)) {
                 result = user;
                 break;
-            } else {
-                throw new UserNotFoundException("Пользователь не найден");
             }
+        }
+        if (result == null) {
+            throw new UserNotFoundException("Пользователь не найден");
         }
         return result;
     }
 
     public static boolean validate(User user) throws UserInvalidException {
-        boolean isvalid = false;
-        if (user.isValid()) {
-            if (user.getUsername().length() < 3) {
+        if (!user.isValid() || user.getUsername().length() < 3) {
                 throw new UserInvalidException("Пользователь не валидный");
             }
-            isvalid = true;
-        } else {
-            throw new UserInvalidException("Пользователь не валидный");
+        return true;
         }
-        return isvalid;
-    }
 
     public static void main(String[] args) {
         User[] users = {
