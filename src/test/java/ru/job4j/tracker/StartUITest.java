@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.job4j.tracker.action.*;
 import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.input.MockInput;
+import ru.job4j.tracker.input.ValidateInput;
 import ru.job4j.tracker.output.Output;
 import ru.job4j.tracker.output.StubOutput;
 
@@ -187,5 +188,53 @@ class StartUITest {
                         + "0. Завершить программу" + ln
                         + "=== Завершение программы ===" + ln
         );
+    }
+
+        @Test
+        void whenInvalidInput() {
+            Output output = new StubOutput();
+            Input in = new MockInput(
+                    new String[] {"one", "1"}
+            );
+            ValidateInput input = new ValidateInput(output, in);
+            int selected = input.askInt("Enter menu:");
+            assertThat(selected).isEqualTo(1);
+        }
+
+    @Test
+    void whenValidInput() {
+        Output output = new StubOutput();
+        Input in = new MockInput(
+                new String[] {"3"}
+        );
+        ValidateInput input = new ValidateInput(output, in);
+        int selected = input.askInt("Enter menu:");
+        assertThat(selected).isEqualTo(3);
+    }
+
+    @Test
+    void whenMultipleValidInput() {
+        Output output = new StubOutput();
+        Input in = new MockInput(
+                new String[] {"3", "100", "500"}
+        );
+        ValidateInput input = new ValidateInput(output, in);
+        int selected3 = input.askInt("Enter menu:");
+        assertThat(selected3).isEqualTo(3);
+        int selected100 = input.askInt("Enter menu:");
+        assertThat(selected100).isEqualTo(100);
+        int selected500 = input.askInt("Enter menu:");
+        assertThat(selected500).isEqualTo(500);
+    }
+
+    @Test
+    void whenNegativeNumberInput() {
+        Output output = new StubOutput();
+        Input in = new MockInput(
+                new String[] {"-1000"}
+        );
+        ValidateInput input = new ValidateInput(output, in);
+        int selected = input.askInt("Enter menu:");
+        assertThat(selected).isEqualTo(-1000);
     }
 }
