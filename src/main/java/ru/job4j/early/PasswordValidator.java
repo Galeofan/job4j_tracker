@@ -21,6 +21,7 @@ public class PasswordValidator {
      * @param password Пароль
      * @return Вернет пароль или выбросит исключение.
      */
+
     public static String validate(String password) {
         if (password == null) {
             throw new IllegalArgumentException(
