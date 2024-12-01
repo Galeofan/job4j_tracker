@@ -14,6 +14,7 @@ class PasswordValidatorTest {
         String result = PasswordValidator.validate(password);
         assertThat(result).isEqualTo(expected);
     }
+
     @Test
     void whenPasswordIsNull() {
         IllegalArgumentException exception = assertThrows(
