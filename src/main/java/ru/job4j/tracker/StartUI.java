@@ -6,8 +6,6 @@ import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.input.ValidateInput;
 import ru.job4j.tracker.output.ConsoleOutput;
 import ru.job4j.tracker.output.Output;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,7 +48,5 @@ public class StartUI {
                                                  new ExitAction(output)
                                                  );
         new StartUI(output).init(input, tracker, actions);
-
-
     }
 }
