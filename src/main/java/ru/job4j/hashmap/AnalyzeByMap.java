@@ -15,7 +15,6 @@ public class AnalyzeByMap {
         return (double) score / count;
     }
 
-
     public static List<Label> averageScoreByPupil(List<Pupil> pupils) {
         List<Label> result = new ArrayList<>();
         for (Pupil pupil : pupils) {
