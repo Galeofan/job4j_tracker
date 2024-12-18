@@ -31,49 +31,43 @@ public class AnalyzeByMap {
 
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
         Map<String, Integer> map = new LinkedHashMap<>();
-        List<Label> labels = new ArrayList<>();
-        for (Subject subject : pupils.get(0).subjects()) {
-            String subjname = subject.name();
-            int index = 0;
-            int sum = 0;
             for (Pupil pupil : pupils) {
-                sum += pupil.subjects().get(index).score();
-                index++;
+                for (Subject subject : pupil.subjects()) {
+                    map.put(subject.name(), map.getOrDefault(subject.name(), 0) + subject.score());
+                }
             }
-            map.put(subjname, sum);
-            labels.add(new Label(subjname,
-                    (double) map.getOrDefault(subjname, sum) / pupils.size()));
+        List<Label> labels = new ArrayList<>();
+        for (String key : map.keySet()) {
+            int value = map.get(key);
+            labels.add(new Label(key, (double) value / pupils.size()));
         }
         return labels;
     }
 
     public static Label bestStudent(List<Pupil> pupils) {
-        List<Label> label = new ArrayList<>();
+        List<Label> labels = new ArrayList<>();
         for (Pupil pupil : pupils) {
             int sum = 0;
             for (Subject subject : pupil.subjects()) {
                 sum += subject.score();
             }
-            label.add(new Label(pupil.name(), sum));
+            labels.add(new Label(pupil.name(), sum));
         }
-        label.sort(Comparator.naturalOrder());
-        return label.get(label.size() - 1);
+        labels.sort(Comparator.naturalOrder());
+        return labels.get(labels.size() - 1);
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
         Map<String, Integer> map = new LinkedHashMap<>();
-        List<Label> labels = new ArrayList<>();
-        for (Subject subject : pupils.get(0).subjects()) {
-            String subjname = subject.name();
-            int index = 0;
-            int sum = 0;
-            for (Pupil pupil : pupils) {
-                sum += pupil.subjects().get(index).score();
-                index++;
+        for (Pupil pupil : pupils) {
+            for (Subject subject : pupil.subjects()) {
+                map.put(subject.name(), map.getOrDefault(subject.name(), 0) + subject.score());
             }
-            map.put(subjname, sum);
-            labels.add(new Label(subjname,
-                    (double) map.getOrDefault(subjname, sum)));
+        }
+        List<Label> labels = new ArrayList<>();
+        for (String key : map.keySet()) {
+            int value = map.get(key);
+            labels.add(new Label(key, (double) value));
         }
         labels.sort(Comparator.naturalOrder());
         return labels.get(labels.size() - 1);
