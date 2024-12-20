@@ -5,17 +5,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Класс содержит хранилище клиентов и привязанных к ним счетов
+ * Также содержит основные действия с хранилищем и метод перевода между счетами
+ */
 public class BankService {
+    /**
+     * Мап с клиентами и их счетами
+     */
     private final Map<User, List<Account>> users = new HashMap<>();
 
+    /**
+     * Метод регистрации клиента в системе
+     * @param user клиент
+     */
     public void addUser(User user) {
         users.putIfAbsent(user, new ArrayList<Account>());
     }
 
+    /**
+     * Метод удаления клиента из системы
+     * @param passport паспорт
+     */
     public void deleteUser(String passport) {
             users.remove(new User(passport, ""));
     }
 
+    /**
+     * Метод добавления счёта клиенту по паспорту
+     * @param passport паспорт
+     * @param account счёт
+     */
     public void addAccount(String passport, Account account) {
         User user = findByPassport(passport);
         if (user != null) {
@@ -26,6 +46,11 @@ public class BankService {
         }
     }
 
+    /**
+     * Метод поиска клиента по паспорту
+     * @param passport паспорт
+     * @return клиент
+     */
     public User findByPassport(String passport) {
         for (User user : users.keySet()) {
             if (user.getPassport().equals(passport)) {
@@ -35,6 +60,12 @@ public class BankService {
         return null;
     }
 
+    /**
+     * Метод поиска счета по реквизитам
+     * @param passport паспорт
+     * @param requisite реквизиты
+     * @return счёт
+     */
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
         if (user != null) {
@@ -48,6 +79,15 @@ public class BankService {
         return null;
     }
 
+    /**
+     * Метод перечисления денег с одного счёта на другой
+     * @param sourcePassport паспорт отправителя
+     * @param sourceRequisite счёт отправителя
+     * @param destinationPassport паспорт получателя
+     * @param destinationRequisite счёт получателя
+     * @param amount сумма
+     * @return успешность отправки
+     */
     public boolean transferMoney(String sourcePassport, String sourceRequisite,
                                  String destinationPassport, String destinationRequisite,
                                  double amount) {
@@ -61,6 +101,11 @@ public class BankService {
         return true;
     }
 
+    /**
+     * Метод для тестов
+     * @param user клиент
+     * @return список счетов
+     */
     public List<Account> getAccounts(User user) {
         return users.get(user);
     }
