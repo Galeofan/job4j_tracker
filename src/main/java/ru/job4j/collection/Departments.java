@@ -8,14 +8,14 @@ public class Departments {
         Set<String> temp = new LinkedHashSet<>();
         List<String> result = new ArrayList<>();
         for (String value : departments) {
-            String start = "";
+            String path = "";
             for (String element : value.split("/")) {
-                if (value.startsWith(element)) {
+                if (path.isEmpty()) {
                     temp.add(element);
-                    start = element;
+                    path = element;
                 } else {
-                    start = start + "/" + element;
-                    temp.add(start);
+                    path = path + "/" + element;
+                    temp.add(path);
                 }
             }
         }
