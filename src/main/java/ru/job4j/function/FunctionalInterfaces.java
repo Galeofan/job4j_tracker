@@ -22,7 +22,7 @@ public class FunctionalInterfaces {
         for (Integer key : map.keySet()) {
             if (biPredicate.test(key, map.get(key))) {
                 System.out.println("key: " + key + " value: " + map.get(key));
-            };
+            }
         }
 
         Supplier<List<String>> supplier = () -> new ArrayList<>(map.values());
