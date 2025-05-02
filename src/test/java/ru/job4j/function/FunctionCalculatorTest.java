@@ -15,6 +15,7 @@ class FunctionCalculatorTest {
         List<Double> expected = Arrays.asList(11D, 13D, 15D);
         assertThat(result).containsAll(expected);
     }
+
     @Test
     void whenFunctionThenQuadraticResults() {
         FunctionCalculator function = new FunctionCalculator();
@@ -22,6 +23,7 @@ class FunctionCalculatorTest {
         List<Double> expected = Arrays.asList(25D, 36D, 49D);
         assertThat(result).containsAll(expected);
     }
+
     @Test
     void whenLinearFunctionThenExponentialResults() {
         FunctionCalculator function = new FunctionCalculator();
